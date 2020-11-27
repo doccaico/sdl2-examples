@@ -3,3 +3,6 @@
 !*.*
 
 *.o
+prg
+.ninja_deps
+.ninja_log

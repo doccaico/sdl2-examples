@@ -1,0 +1,32 @@
+cc = gcc
+cflags = -Wall -pedantic -Wextra
+ldflags = -lSDL2
+mode_terminal = -DTERMINAL_BUILD
+mode_sdl2 = -DSDL2_BUILD
+
+rule cc_terminal
+  command = $cc $mode_terminal -MD -MF $out.d $cflags -c $in -o $out
+  depfile = $out.d
+  deps    = gcc
+
+rule link_terminal
+  command = $cc $in -o $out
+
+rule cc_sdl2
+  command = $cc $mode_sdl2 -MD -MF $out.d $cflags -c $in -o $out
+  depfile = $out.d
+  deps    = gcc
+
+rule link_sdl2
+  command = $cc $in -o $out $ldflags
+
+
+build game_sdl2.o: cc_sdl2 game.c
+build main_sdl2.o: cc_sdl2 main_sdl2.c
+build lifegame_sdl2: link_sdl2 main_sdl2.o game_sdl2.o
+
+build game_terminal.o: cc_terminal game.c
+build main_terminal.o: cc_terminal main_terminal.c
+build lifegame_terminal: link_terminal main_terminal.o game_terminal.o
+
+default lifegame_terminal
