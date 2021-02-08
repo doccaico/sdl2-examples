@@ -2,10 +2,18 @@
 #### Build and Run
 ```
 # terminal mode
-$ ninja # or ninja lifegame_terminal
+# gcc -O2 -Wall -DTERMINAL_BUILD -o lifegame_terminal game.c main_sdl2.c -lSDL2
 $ ./lifegame_terminal
 
 # sdl2 mode
+# gcc -O2 -Wall -DSDL2_BUILD -o lifegame_sdl2 game.c main_sdl2.c -lSDL2
+$ ./lifegame_sdl2
+
+# terminal mode (ninja)
+$ ninja # or ninja lifegame_terminal
+$ ./lifegame_terminal
+
+# sdl2 mode (ninja)
 $ ninja lifegame_sdl2
 $ ./lifegame_sdl2
 ```
